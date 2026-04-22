@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>💖 Uma surpresa pra você 💖</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #333;
+      padding: 50px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 80%;
+      margin-top: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff6b81;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #ff4757;
+    }
+
+    #mensagem {
+      margin-top: 20px;
+      font-size: 18px;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>✨ Uma surpresa pra você ✨</h2>
+  <p>Digite a palavra mágica 💌</p>
+
+  <input type="text" id="resposta" placeholder="Palavra mágica">
+  <br>
+  <button onclick="verificar()">Desbloquear</button>
+
+  <div id="mensagem"></div>
+</div>
+
+<script>
+  const palavraSecreta = "gatosa";
+
+  function digitarTexto(texto, elemento, velocidade = 40) {
+    let i = 0;
+    elemento.innerHTML = "";
+
+    function escrever() {
+      if (i < texto.length) {
+        elemento.innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escrever, velocidade);
+      }
+    }
+
+    escrever();
+  }
+
+  function verificar() {
+    const resposta = document.getElementById("resposta").value.trim().toLowerCase();
+    const mensagem = document.getElementById("mensagem");
+
+    if (resposta === palavraSecreta) {
+      const texto = 
+`💖 Amor da minha Vida 💖
+
+Desde que você apareceu, tudo ficou mais leve...
+Seu sorriso tem um efeito que nem código nenhum explica...
+
+E quer saber?
+
+Você é uma das coisas mais especiais que já me aconteceram 💕
+Fico muito feliz em estar comemorando nossa data especial de 1 ano e 5 meses meu amor!! 💖💖
+(Quis fazer algo diferente para mostrar o quão importante você é em minha vida e estar presente em tudo o que faço e penso, Te amo MUITÃO minha Princesa!!!!)
+
+🌹✨`;
+
+      digitarTexto(texto, mensagem);
+    } else {
+      mensagem.innerHTML = "😔 Não é essa... tenta de novo 💭";
+    }
+  }
+</script>
+
+</body>
+</html>
