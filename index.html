@@ -2,6 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+
+  <!-- 📱 ESSENCIAL PRA CELULAR -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>💖 Uma surpresa pra você 💖</title>
 
   <style>
@@ -11,7 +15,7 @@
 
     body {
       margin: 0;
-      overflow-y: auto; /* corrigido */
+      overflow-y: auto;
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       text-align: center;
@@ -21,34 +25,45 @@
       position: relative;
       z-index: 2;
       background: white;
-      padding: 30px;
+      padding: 20px;
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      max-width: 400px;
-      margin: 100px auto 800px; /* espaço extra pra rolar */
+      max-width: 90%;
+      margin: 60px auto 600px;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
     }
 
     input {
-      padding: 10px;
+      padding: 12px;
       border-radius: 10px;
       border: 1px solid #ccc;
-      width: 80%;
+      width: 90%;
       margin-top: 15px;
+      font-size: 16px;
     }
 
     button {
       margin-top: 15px;
-      padding: 10px 20px;
+      padding: 12px 25px;
       border: none;
       border-radius: 10px;
       background: #ff6b81;
       color: white;
       cursor: pointer;
+      font-size: 16px;
     }
 
     #mensagem {
       margin-top: 20px;
       white-space: pre-line;
+      font-size: 15px;
     }
 
     img {
@@ -72,37 +87,31 @@
       }
     }
 
-    /* 💖 Barra lateral bonita */
+    /* 💖 Barra adaptada */
     .nav-scroll {
       position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      bottom: 20px;
+      right: 50%;
+      transform: translateX(50%);
       z-index: 999;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 15px;
     }
 
     .nav-scroll button {
-      background: rgba(255, 107, 129, 0.8);
+      background: rgba(255, 107, 129, 0.9);
       border: none;
       color: white;
       font-size: 18px;
-      padding: 12px;
+      padding: 15px;
       border-radius: 50%;
       cursor: pointer;
       backdrop-filter: blur(10px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-    }
-
-    .nav-scroll button:hover {
-      transform: scale(1.2);
-      background: #ff4757;
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -118,7 +127,7 @@
   <img id="foto" src="foto.jpeg" style="display:none;">
 </div>
 
-<!-- 💖 Barra de navegação -->
+<!-- 💖 Barra -->
 <div class="nav-scroll">
   <button onclick="scrollTopo()">⬆️</button>
   <button onclick="scrollBaixo()">⬇️</button>
@@ -148,21 +157,18 @@
     const foto = document.getElementById("foto");
 
     if (resposta === palavraSecreta) {
-
       const texto = `💖 Amor da minha Vida 💖
 
 Desde que você apareceu, tudo ficou mais leve...
 Seu sorriso tem um efeito que nem código nenhum explica...
 
 Você é uma das coisas mais especiais que já me aconteceram 💕
-Fico muito feliz em estar comemorando nossa data especial de 1 ano e 5 meses meu amor!! 💖💖
-(Quis fazer algo diferente para mostrar o quão importante você é em minha vida e estar presente em tudo o que faço e penso, Te amo MUITÃO minha Princesa!!!!)
+Fico muito feliz em estar comemorando nossa data especial 💖
 
 🌹✨`;
 
       digitarTexto(texto, mensagem, 50);
       foto.style.display = "block";
-
     } else {
       mensagem.innerHTML = "😔 Não é essa... tenta de novo 💭";
     }
@@ -187,9 +193,7 @@ Fico muito feliz em estar comemorando nossa data especial de 1 ano e 5 meses meu
 
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 5000);
+    setTimeout(() => heart.remove(), 5000);
   }
 
   setInterval(criarCoracao, 300);
