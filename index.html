@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>💖 Uma surpresa pra você 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      text-align: center;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 400px;
+      margin: 100px auto;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 80%;
+      margin-top: 15px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff6b81;
+      color: white;
+      cursor: pointer;
+    }
+
+    #mensagem {
+      margin-top: 20px;
+      white-space: pre-line;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .heart {
+      position: absolute;
+      top: -10px;
+      color: red;
+      animation: fall linear infinite;
+      font-size: 20px;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>✨ Uma surpresa pra você ✨</h2>
+  <p>Digite a palavra mágica 💌</p>
+
+  <input type="text" id="resposta">
+  <br>
+  <button onclick="verificar()">Desbloquear</button>
+
+  <div id="mensagem"></div>
+
+  <img id="foto" src="foto.jpg" style="display:none;">
+</div>
+
+<script>
+  const palavraSecreta = "gatosa"; // corrigido
+
+  // ✍️ Função de digitação
+  function digitarTexto(texto, elemento, velocidade = 40) {
+    let i = 0;
+    elemento.innerHTML = "";
+
+    function escrever() {
+      if (i < texto.length) {
+        elemento.innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escrever, velocidade);
+      }
+    }
+
+    escrever();
+  }
+
+  function verificar() {
+    const resposta = document.getElementById("resposta").value.trim().toLowerCase();
+    const mensagem = document.getElementById("mensagem");
+    const foto = document.getElementById("foto");
+
+    if (resposta === palavraSecreta) {
+
+      const texto = `💖 Amor da minha Vida 💖
+
+Desde que você apareceu, tudo ficou mais leve...
+Seu sorriso tem um efeito que nem código nenhum explica...
+
+Você é uma das coisas mais especiais que já me aconteceram 💕
+Fico muito feliz em estar comemorando nossa data especial de 1 ano e 5 meses meu amor!! 💖💖
+(Quis fazer algo diferente para mostrar o quão importante você é em minha vida e estar presente em tudo o que faço e penso, Te amo MUITÃO minha Princesa!!!!)
+
+🌹✨`;
+
+      digitarTexto(texto, mensagem, 50);
+      foto.style.display = "block";
+
+    } else {
+      mensagem.innerHTML = "😔 Não é essa... tenta de novo 💭";
+    }
+  }
+
+  function criarCoracao() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }
+
+  setInterval(criarCoracao, 300);
+</script>
+
+</body>
+</html>
