@@ -5,9 +5,13 @@
   <title>💖 Uma surpresa pra você 💖</title>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      overflow: hidden;
+      overflow-y: auto; /* corrigido */
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       text-align: center;
@@ -21,7 +25,7 @@
       border-radius: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       max-width: 400px;
-      margin: 100px auto;
+      margin: 100px auto 800px; /* espaço extra pra rolar */
     }
 
     input {
@@ -67,6 +71,36 @@
         opacity: 0;
       }
     }
+
+    /* 💖 Barra lateral bonita */
+    .nav-scroll {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-scroll button {
+      background: rgba(255, 107, 129, 0.8);
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .nav-scroll button:hover {
+      transform: scale(1.2);
+      background: #ff4757;
+    }
   </style>
 </head>
 <body>
@@ -84,10 +118,15 @@
   <img id="foto" src="foto.jpeg" style="display:none;">
 </div>
 
-<script>
-  const palavraSecreta = "gatosa"; // corrigido
+<!-- 💖 Barra de navegação -->
+<div class="nav-scroll">
+  <button onclick="scrollTopo()">⬆️</button>
+  <button onclick="scrollBaixo()">⬇️</button>
+</div>
 
-  // ✍️ Função de digitação
+<script>
+  const palavraSecreta = "gatosa";
+
   function digitarTexto(texto, elemento, velocidade = 40) {
     let i = 0;
     elemento.innerHTML = "";
@@ -127,6 +166,14 @@ Fico muito feliz em estar comemorando nossa data especial de 1 ano e 5 meses meu
     } else {
       mensagem.innerHTML = "😔 Não é essa... tenta de novo 💭";
     }
+  }
+
+  function scrollTopo() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function scrollBaixo() {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }
 
   function criarCoracao() {
