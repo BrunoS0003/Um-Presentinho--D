@@ -2,10 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-
-  <!-- 📱 ESSENCIAL PRA CELULAR -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>💖 Uma surpresa pra você 💖</title>
 
   <style>
@@ -30,14 +27,6 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       max-width: 90%;
       margin: 60px auto 600px;
-    }
-
-    h2 {
-      font-size: 20px;
-    }
-
-    p {
-      font-size: 14px;
     }
 
     input {
@@ -66,16 +55,26 @@
       font-size: 15px;
     }
 
-    img {
+    /* 📸 Foto com animação */
+    #foto {
       width: 100%;
       border-radius: 10px;
       margin-top: 15px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 1s ease;
+      display: none;
     }
 
+    #foto.mostrar {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* 💖 corações caindo */
     .heart {
       position: absolute;
       top: -10px;
-      color: red;
       animation: fall linear infinite;
       font-size: 20px;
     }
@@ -87,7 +86,7 @@
       }
     }
 
-    /* 💖 Barra adaptada */
+    /* 💖 Barra */
     .nav-scroll {
       position: fixed;
       bottom: 20px;
@@ -124,10 +123,9 @@
 
   <div id="mensagem"></div>
 
-  <img id="foto" src="foto.jpeg" style="display:none;">
+  <img id="foto" src="foto.jpeg">
 </div>
 
-<!-- 💖 Barra -->
 <div class="nav-scroll">
   <button onclick="scrollTopo()">⬆️</button>
   <button onclick="scrollBaixo()">⬇️</button>
@@ -147,7 +145,6 @@
         setTimeout(escrever, velocidade);
       }
     }
-
     escrever();
   }
 
@@ -168,7 +165,12 @@ Fico muito feliz em estar comemorando nossa data especial 💖
 🌹✨`;
 
       digitarTexto(texto, mensagem, 50);
+
       foto.style.display = "block";
+      setTimeout(() => {
+        foto.classList.add("mostrar");
+      }, 100);
+
     } else {
       mensagem.innerHTML = "😔 Não é essa... tenta de novo 💭";
     }
@@ -182,21 +184,49 @@ Fico muito feliz em estar comemorando nossa data especial 💖
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }
 
+  // 💖 corações caindo
   function criarCoracao() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML = "💖";
+
+    const emojis = ["💖","💕","💘","💞"];
+    heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
 
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
 
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 5000);
   }
 
   setInterval(criarCoracao, 300);
+
+  // 💖 corações ao toque
+  document.addEventListener("click", function(e) {
+    criarCoracaoClique(e.clientX, e.clientY);
+  });
+
+  function criarCoracaoClique(x, y) {
+    const heart = document.createElement("div");
+    const emojis = ["💖","💕","💘","💞"];
+    heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+    heart.style.position = "fixed";
+    heart.style.left = x + "px";
+    heart.style.top = y + "px";
+    heart.style.fontSize = "20px";
+    heart.style.pointerEvents = "none";
+    heart.style.transition = "all 1s ease";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.style.transform = "translateY(-80px) scale(1.5)";
+      heart.style.opacity = "0";
+    }, 50);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
 </script>
 
 </body>
